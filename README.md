@@ -5,7 +5,7 @@ A simple TODO app built using Flask. The application supports adding todos, upda
 Follow the instructions below to setup the project.
 1. Open the terminal or command prompt.
 2. Type `virtualenv env` to create a virtual environment.
-3. Type `env\Scripts\active` to activate the environment on Windows.
+3. Type `env\Scripts\activate` to activate the environment on Windows.
 4. Type `pip install -r requirements.txt` to install the dependencies.
 5. Type `python app.py` to start the Flask application.
 
