@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+
+{% block styles %}
+<style>
+    .hide {
+        display: none !important;
+    }
+</style>
+{% endblock %}
+
+{% block topJS %}
+{% endblock %}
+
+{% block title %}
+Home
+{% endblock %}
+
+{% block body %}
+    <div class="container pt-4">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="mt-2">Add TODO</h4>
+                <p class="mb-2">Fill the following form to enter a TODO</p>
+            </div>
+            <div class="card-body">
+                <form action="/" method="POST">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" name="todoTitle" placeholder="TODO Title" required>
+                        <label for="todoInput">TODO Title</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" name="todoDescription" placeholder="TODO Description" required>
+                        <label for="todoInput">TODO Description</label>
+                    </div>
+                    <input type="submit" value="Add" class="btn btn-success">
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="container pt-4">
+        <form class="d-flex">
+            <div class="form-floating w-100">
+                <div class="input-group input-group-sm">
+                    <span class="input-group-text">Search Here</span>
+                    <input type="text" class="form-control" id="todoSearch">
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="container pt-4">
+        <table class="table table-light table-hover table-rounded">
+            <thead>
+                <tr>
+                    <th scope="col" class="text-center">S. No</th>
+                    <th scope="col" class="text-center">Title</th>
+                    <th scope="col" class="text-center">Description</th>
+                    <th scope="col" class="text-center">Date Created</th>
+                    <th scope="col" class="text-center">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for todo in allTodo %}
+                    <tr class="todo">
+                        <td class="text-center">{{ loop.index }}</td>
+                        <td class="text-center todo-title">{{ todo.title }}</td>
+                        <td class="text-center todo-description">{{ todo.description }}</td>
+                        <td class="text-center">{{ todo.dateCreated.strftime("%d %B, %Y %I:%M:%S %Z") }}</td>
+                        <td class="text-center">
+                            <div class="btn-group">
+                                <a href="/delete/{{ todo.sno }}" class="btn btn-outline-success btn-sm">Done</a>
+                                <a href="/update/{{ todo.sno }}" class="btn btn-outline-primary btn-sm">Update</a>
+                            </div>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr class="table-info">
+                        <td class="text-center" colspan="5">No TODOs available 😢</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
+
+{% block bottomJS %}
+<script>
+    const todoSearch = document.getElementById("todoSearch");
+    const todos = document.querySelectorAll(".todo");
+    todoSearch.addEventListener("keyup", (e) => {
+        const query = todoSearch.value.toLowerCase();
+        todos.forEach(todo => {
+            title = todo.querySelector(".todo-title").innerText.toLowerCase();
+            description = todo.querySelector(".todo-description").innerText.toLowerCase();
+
+            if (!title.includes(query) && !description.includes(query)) {
+                todo.classList.add("hide");
+            } else {
+                todo.classList.remove("hide");
+            }
+        });
+    });
+</script>
+{% endblock %}

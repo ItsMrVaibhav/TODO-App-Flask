@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block styles %}
+{% endblock %}
+
+{% block topJS %}
+{% endblock %}
+
+{% block title %}
+Update TODO
+{% endblock %}
+
+{% block body %}
+    <div class="container pt-4">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="mt-2">Update TODO</h4>
+                <p class="mb-2">Fill the following form to enter a TODO</p>
+            </div>
+            <div class="card-body">
+                <form action="" method="POST">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" name="todoTitle" placeholder="TODO Title" value="{{ todo.title }}" required>
+                        <label for="todoInput">TODO Title</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" name="todoDescription" placeholder="TODO Description" value="{{ todo.description }}" required>
+                        <label for="todoInput">TODO Description</label>
+                    </div>
+                    <input type="submit" value="Update" class="btn btn-success">
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block bottomJS %}
+{% endblock %}
